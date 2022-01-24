@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+
+  iac-scanner:
+    image: papina/iac-scanner
+    container_name: "iac-scanner"
+    restart: unless-stopped
+    volumes:
+      - ${PWD}:/src

@@ -48,7 +48,14 @@ RUN apt-get -y clean
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
 
-ENV scanfolder=/src/
+# Default Sane Environment Variables
+ENV scanfolder="/src"
+ENV CFN_NAG_OPT="--ignore-fatal"
+ENV CFN_LINT_FIND="-name '*.yml' -o -name '*.yaml'"
+ENV CFN_LINT_OPT="-b"
+ENV CFN_NAG_OPT="--ignore-fatal"
+ENV CHECKOV_OPT="--skip-check CKV_SECRET_6 --skip-suppressions --quiet"
+ENV INPUT_SCANNER="all"
+
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-# ENTRYPOINT ["/entrypoint.sh"]
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/entrypoint.sh"]
