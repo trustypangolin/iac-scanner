@@ -11,7 +11,7 @@ if [ ! -d "$scanfolder" ]; then
 fi
 
 if [ -z "$INPUT_SCANNER" ]; then
-  echo "environment variable SCANNER is not set. Please use 'cfn-lint', 'cfn-nag', 'checkov', or 'all' Quitting."
+  echo "environment variable SCANNER is not set. Please use 'cfn-lint', 'cfn-nag', 'checkov', 'tfscan', or 'all' Quitting."
   exit 1
 fi
 
@@ -35,6 +35,11 @@ case $INPUT_SCANNER in
   "checkov")
     echo -n "...scanning with only checkov"
     sh -c "checkov ${CHECKOV_OPT} -d ${scanfolder}"
+    ;;
+
+  "tfscan")
+    echo -n "...scanning with only tfscan"
+    sh -c "tfscan ${scanfolder}"
     ;;
 
   "all")
